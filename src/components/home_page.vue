@@ -4,40 +4,49 @@
       <img class="background" :src="background" />
     </div>
     <div class="header">
-      <div class="top">
+      <a-row class="top">
+        <a-col class="left" :span="16">
+          <a-icon class="iconTitle" type="trademark" />
+          <span class="shuyix">数宜信</span>
+          <span class="little">供应链金融一站式服务</span>
+        </a-col>
+        <a-col class="right" :span="8">
+          <div class="txDiv">
+            <span class="txSpan">
+              <img class="touxiang" src="../assets/image/touxiang.jpg" />
+              <a-icon class="iconDowm" type="down" />
+            </span>
+            <span class="item">
+              <ul @click="clickLi">
+                <li>
+                  <a-icon type="user" />
+                  <span>我的资料</span>
+                </li>
+                <li>
+                  <a-icon type="unlock" />
+                  <span>修改密码</span>
+                </li>
+                <li>
+                  <a-icon type="poweroff" />
+                  <span>退出登录</span>
+                </li>
+              </ul>
+            </span>
+          </div>
+        </a-col>
+      </a-row>
+      <div class="title">
+        <p>供不应绝 更上层楼</p>
+        <p></p>
         <a-row>
-          <a-col class="left" :span="16">
-            <a-icon class="iconTitle" type="trademark" />
-            <span class="shuyix">数宜信</span>
-            <span class="little">供应链金融一站式服务</span>
-          </a-col>
-          <a-col class="right" :span="8">
-            <div class="txDiv">
-              <span class="txSpan">
-                <img class="touxiang" src="../assets/image/touxiang.jpg" />
-                <a-icon class="iconDowm" type="down" />
-              </span>
-              <span class="item">
-                <ul @click="clickLi">
-                  <li>
-                    <a-icon type="user" />
-                    <span>我的资料</span>
-                  </li>
-                  <li>
-                    <a-icon type="unlock" />
-                    <span>修改密码</span>
-                  </li>
-                  <li>
-                    <a-icon type="poweroff" />
-                    <span>退出登录</span>
-                  </li>
-                </ul>
-              </span>
-            </div>
+          <a-col class="xinyong" :span="16">信用查询 / 指标治理 / 决策辅助</a-col>
+          <a-col class="jiantou" :span="8">
+            <span class="left">＜</span>
+            <span class="right">＞</span>
           </a-col>
         </a-row>
+        <p></p>
       </div>
-      <div class="title"></div>
     </div>
     <div class="content">content</div>
     <div class="footer">footer</div>
@@ -89,7 +98,7 @@ export default {
   }
   .header {
     width: 100%;
-    min-height: 380px;
+    min-height: 356px;
     .top {
       .left {
         padding-left: 500px;
@@ -120,10 +129,10 @@ export default {
           .txSpan {
             display: inline-block;
             width: 95px;
-            height: 60px;
+            height: 55px;
             .touxiang {
-              width: 60px;
-              height: 60px;
+              width: 55px;
+              height: 55px;
               border-radius: 8px;
             }
             .iconDowm {
@@ -139,7 +148,7 @@ export default {
           .item {
             visibility: hidden;
             position: absolute;
-            top: 60px;
+            top: 55px;
             left: 0;
             display: inline-block;
             height: 96px;
@@ -181,7 +190,41 @@ export default {
       }
     }
     .title {
+      color: white;
+      p:first-of-type {
+        font-size: 45px;
+        padding: 50px 0 20px 650px;
+        margin: 0;
+      }
+      p:nth-of-type(2) {
+        width: 100px;
+        height: 5px;
+        background: linear-gradient(left, #ccc, transparent); //线性渐变-透明
+        margin-left: 650px;
+        margin-bottom: 20px;
+      }
+      .xinyong {
+        padding-left: 650px;
+        font-size: 16px;
+      }
+      .jiantou {
+        padding-left: 180px;
+        .left {
+          font-size: 30px;
+          cursor: pointer;
+        }
+        .right {
+          margin-left: 40px;
+          font-size: 30px;
+          cursor: pointer;
+        }
+      }
     }
+  }
+  .content {
+    width: 100%;
+    min-height: 400px;
+    // background: pink;
   }
 }
 </style>

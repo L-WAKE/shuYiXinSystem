@@ -2,8 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/view/home'
 import Login from '@/view/Login'
-import HomePage from '@/components/home_page'
 import Layout from '@/layouts/layout'
+import nopage from '@/view/404'
+
 
 
 
@@ -16,7 +17,7 @@ const router = new Router({
       name: 'Login',
       component: Login,
       meta: {
-        title: "用户登录"
+        name: "用户登录"
       }
     },
     {
@@ -24,7 +25,7 @@ const router = new Router({
       name: 'Login',
       component: Login,
       meta: {
-        title: "用户登录"
+        name: "用户登录"
       }
     },
     {
@@ -32,18 +33,24 @@ const router = new Router({
       name: 'Home',
       component: Home,
       meta: {
-        title: "XXX管理系统"
+        name: "首页"
       }
-    },
-    {
-      path: '/HomePage',
-      name: 'HomePage',
-      component: HomePage
     },
     {
       path: '/Layout',
       name: 'Layout',
-      component: Layout
+      component: Layout,
+      meta: {
+        name: "XXX管理系统"
+      }
+    },
+    {
+      path: '*',
+      name: '404',
+      component: nopage,
+      meta: {
+        name: "404"
+      }
     }
   ]
 })
