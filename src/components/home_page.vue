@@ -33,10 +33,10 @@
         </a-col>
       </a-row>
       <div class="title">
-        <p>供不应绝 更上层楼</p>
+        <p>{{title}}</p>
         <p></p>
         <a-row>
-          <a-col class="xinyong" :span="16">信用查询 / 指标治理 / 决策辅助</a-col>
+          <a-col class="xinyong" :span="16">{{xinyong}}</a-col>
           <a-col class="jiantou" :span="8">
             <span @click="left" class="left">＜</span>
             <span @click="right" class="right">＞</span>
@@ -46,18 +46,21 @@
       </div>
     </div>
     <div class="content">
-      <ul class="conUl">
-        <li>
-          <img src="../assets/icons/zx_a.png" />
-          <span>征信系统</span>
+      <ul class="conUl" @mouseover="hoverLi">
+        <li :class="zxActive?'':'active'">
+          <img :src="zxActive?zx_a:zx_b" />
+          <p>征信系统</p>
+          <p>企业征信询服务，通过征信系统，用户能够实时查询企业相关的工商登记信息，年报，股东信息，投资人信息，涉诉，失信，拥有商标，知识产权，企业证书，主要人员信息，变更记录等信息，并下载专业的分析报告辅助决策。</p>
         </li>
-        <li>
-          <img src="../assets/icons/zb_a.png" />
-          <span>指标治理</span>
+        <li :class="zbActive?'':'active'">
+          <img :src="zbActive?zb_a:zb_b" />
+          <p>指标治理</p>
+          <!-- <p>企业征信询服务，通过征信系统，用户能够实时查询企业相关的工商登记信息，年报，股东信息，投资人信息，涉诉，失信，拥有商标，知识产权，企业证书，主要人员信息，变更记录等信息，并下载专业的分析报告辅助决策。</p> -->
         </li>
-        <li>
-          <img src="../assets/icons/jc_a.png" />
-          <span>决策引擎</span>
+        <li :class="jcActive?'':'active'">
+          <img :src="jcActive?jc_a:jc_b" />
+          <p>决策引擎</p>
+          <!-- <p>企业征信询服务，通过征信系统，用户能够实时查询企业相关的工商登记信息，年报，股东信息，投资人信息，涉诉，失信，拥有商标，知识产权，企业证书，主要人员信息，变更记录等信息，并下载专业的分析报告辅助决策。</p> -->
         </li>
       </ul>
     </div>
@@ -76,8 +79,22 @@
 export default {
   data() {
     return {
-      background: require("../assets/image/3.jpg"),
-      backgroundZx: require("../assets/image/zxing.jpg"),
+      title: "供不应绝 更上层楼",
+      xinyong: "信用查询 / 指标治理 / 决策辅助",
+
+      zxActive: true,
+      zbActive: true,
+      jcActive: true,
+
+      zx_a: require("../assets/icons/zx_a.png"),
+      zx_b: require("../assets/icons/zx_b.png"),
+      zb_a: require("../assets/icons/zb_a.png"),
+      zb_b: require("../assets/icons/zb_b.png"),
+      jc_a: require("../assets/icons/jc_a.png"),
+      jc_b: require("../assets/icons/jc_b.png"),
+
+      background: require("../assets/image/home_page.jpg"),
+      backgroundZx: require("../assets/image/zx.jpg"),
       backgroundZb: require("../assets/image/zhib.jpg"),
       backgroundJc: require("../assets/image/juece.jpg")
     }
@@ -97,11 +114,37 @@ export default {
       }
     },
     left() {
-      let url = `url(${this.backgroundZx}) no-repeat 50%`
+      let url = `url(${this.backgroundZx}) no-repeat 50% / 100% 100%`
       this.$refs.box.style.background = url
     },
     right() {
       console.log("right")
+    },
+    // 鼠标移动到某一个元素上时
+    hoverLi(e) {
+      let target = e.target || e.srcElement
+      let name = target.innerText.trim()
+      if (name === "征信系统") {
+        this.title = "追本溯源 风控无忧"
+        this.xinyong = "商业调查 / 风险挖掘 / 信用报告"
+        this.zxActive = false
+        this.zbActive = true
+        this.jcActive = true
+      }
+      if (name === "指标治理") {
+        this.title = "算无遗策 绵绵不绝"
+        this.xinyong = "指标计算 / 批量管理 / 定制输出"
+        this.zbActive = false
+        this.zxActive = true
+        this.jcActive = true
+      }
+      if (name === "决策引擎") {
+        this.title = "识明智审 决策千里"
+        this.xinyong = "客户评级 / 风险计量 / 审批决策"
+        this.jcActive = false
+        this.zbActive = true
+        this.zxActive = true
+      }
     }
   }
 }
@@ -110,8 +153,8 @@ export default {
 .box {
   width: 100%;
   height: 100%;
-  min-width: 1850px;
-  background: url("../assets/image/3.jpg") no-repeat 50%;
+  min-width: 1500px;
+  background: url("../assets/image/home_page.jpg") no-repeat 50%;
   background-size: 100% 100%;
   .header {
     width: 100%;
@@ -246,6 +289,7 @@ export default {
       list-style: none;
       padding-left: 480px;
       li {
+        transition: all 0.5s;
         width: 200px;
         height: 200px;
         float: left;
@@ -258,13 +302,35 @@ export default {
         img {
           width: 60px;
           height: 60px;
+          transition: all 0.5s;
         }
-        span {
+        p:first-of-type {
           font-size: 16px;
           font-weight: bold;
           color: #000;
           padding-top: 20px;
           font-family: "STHeiti";
+          transition: all 0.5s;
+        }
+        p:last-of-type {
+          // display: none;
+        }
+      }
+      .active {
+        width: 500px;
+        height: 300px;
+        display: block;
+        img {
+          margin: 40px 0px 10px 20px;
+        }
+        p:first-of-type {
+          padding-top: 0;
+          padding-left: 20px;
+        }
+        p:last-of-type {
+          // display: block;
+          padding-left: 20px;
+          color: #000;
         }
       }
     }
@@ -273,7 +339,7 @@ export default {
     width: 100%;
     padding: 0 16px;
     text-align: center;
-    margin: 200px 0 24px;
+    margin: 100px 0 24px;
     .links {
       margin-bottom: 8px;
       font-size: 14px;
