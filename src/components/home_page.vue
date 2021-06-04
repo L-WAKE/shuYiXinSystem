@@ -135,15 +135,9 @@ export default {
       let backgArr = [this.backgroundZx, this.backgroundZb, this.backgroundJc]
       let url = `url(${backgArr[this.index]}) no-repeat 50% / 100% 100%`
       this.$refs.box.style.background = url
-      if (backgArr[this.index] === this.backgroundZx) {
-        this.zxfun()
-      }
-      if (backgArr[this.index] === this.backgroundZb) {
-        this.zbfun()
-      }
-      if (backgArr[this.index] === this.backgroundJc) {
-        this.jcfun()
-      }
+      if (backgArr[this.index] === this.backgroundZx) this.zxfun()
+      if (backgArr[this.index] === this.backgroundZb) this.zbfun()
+      if (backgArr[this.index] === this.backgroundJc) this.jcfun()
     },
 
     // 鼠标移动到某一个元素上时
