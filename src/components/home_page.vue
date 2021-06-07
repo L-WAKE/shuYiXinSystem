@@ -46,7 +46,7 @@
       </div>
     </div>
     <div class="content">
-      <ul class="conUl" @mouseover="hoverLi">
+      <ul class="conUl" @click="()=>{$router.push('/Layout')}" @mouseover="hoverLi">
         <li :class="zxActive?'':'active'">
           <img :src="zxActive?zx_a:zx_b" />
           <p>征信系统</p>
@@ -117,6 +117,7 @@ export default {
         console.log("跳转到修改密码页")
       }
       if (name === "退出登录") {
+        this.$router.push('/login')
         console.log("执行退出登录逻辑")
       }
     },
@@ -193,7 +194,7 @@ export default {
   width: 100%;
   height: 100%;
   min-width: 1500px;
-  transition: background 2s;
+  transition: all 2s;
   background: url("../assets/image/home_page.jpg") no-repeat 50%;
   background-size: 100% 100%;
   .header {
