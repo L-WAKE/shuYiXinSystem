@@ -56,7 +56,8 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  const isLogin = window.localStorage.getItem('login') ? true : false
+  const isLogin = window.localStorage.getItem('login') == 'true' ? true : false
+  console.log(isLogin)
   if (isLogin) {
     next()
   } else {

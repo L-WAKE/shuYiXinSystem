@@ -36,16 +36,23 @@
     </a-layout-sider>
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0">
-        <a-tooltip placement="right">
-          <template slot="title">
-            <span>{{collapsed ? '展开' : '收起'}}</span>
-          </template>
-          <a-icon
-            class="trigger"
-            :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-            @click="() => (collapsed = !collapsed)"
-          />
-        </a-tooltip>
+        <a-row>
+          <a-col :span="16">
+            <a-tooltip placement="right">
+              <template slot="title">
+                <span>{{collapsed ? '展开' : '收起'}}</span>
+              </template>
+              <a-icon
+                class="trigger"
+                :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+                @click="() => (collapsed = !collapsed)"
+              />
+            </a-tooltip>
+          </a-col>
+          <a-col class="right" :span="8">
+            <head-pint></head-pint>
+          </a-col>
+        </a-row>
       </a-layout-header>
       <a-layout-content
         :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '700px' }"
@@ -55,7 +62,11 @@
   </a-layout>
 </template>
 <script>
+import HeadPint from "@/components/headp.vue"
 export default {
+  components: {
+    HeadPint
+  },
   data() {
     return {
       collapsed: false
@@ -65,6 +76,9 @@ export default {
 </script>
 <style scoped lang='less'>
 #components-layout-demo-custom-trigger {
+  .right {
+    padding-left: 440px;
+  }
   .trigger {
     font-size: 18px;
     line-height: 64px;

@@ -15,6 +15,13 @@ Vue.use(Antd)
 Vue.prototype.$axios = axios
 Vue.prototype.$api = api; // 将api挂载到vue的原型上
 Vue.config.productionTip = false
+// 跳转时修改标题
+router.beforeEach((to, from, next) => {
+  if (to.meta.name) {
+    document.title = to.meta.name
+  }
+  next()
+})
 
 /* eslint-disable no-new */
 new Vue({
