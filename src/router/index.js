@@ -4,6 +4,8 @@ import Home from '@/view/home'
 import Login from '@/view/Login'
 import Layout from '@/layouts/layout'
 import nopage from '@/view/404'
+import user from '@/view/user/index'
+import role from '@/view/role/index'
 
 
 
@@ -40,9 +42,22 @@ const router = new Router({
       path: '/Layout',
       name: 'Layout',
       component: Layout,
+      // redirect: '/Layout',
       meta: {
         name: "XXX管理系统"
-      }
+      },
+      children: [
+        {
+          path: '/Layout/user',
+          name: '/Layout/user',
+          component: user
+        },
+        {
+          path: '/Layout/role',
+          name: '/Layout/role',
+          component: role
+        }
+      ]
     },
     {
       path: '*',

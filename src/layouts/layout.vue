@@ -1,13 +1,13 @@
 <template>
-  <a-layout id="components-layout-demo-custom-trigger">
+  <a-layout class="box">
     <a-layout-sider v-model="collapsed">
       <div class="logo"></div>
       <a-menu theme="dark" :default-selected-keys="['1']" mode="inline">
-        <a-menu-item key="1">
+        <a-menu-item key="1" @click="goto('/Layout/user')">
           <a-icon type="pie-chart" />
           <span>用户管理</span>
         </a-menu-item>
-        <a-menu-item key="2">
+        <a-menu-item key="2" @click="goto('/Layout/role')">
           <a-icon type="desktop" />
           <span>角色管理</span>
         </a-menu-item>
@@ -50,7 +50,7 @@
             </a-tooltip>
           </a-col>
           <a-col class="right" :span="8">
-            <head-pint></head-pint>
+            <head-pint class="header"></head-pint>
           </a-col>
         </a-row>
       </a-layout-header>
@@ -71,20 +71,32 @@ export default {
     return {
       collapsed: false
     }
+  },
+  methods: {
+    goto(path) {
+      this.$router.push(path)
+    }
   }
 }
 </script>
 <style scoped lang='less'>
-#components-layout-demo-custom-trigger {
+.box {
+  .title {
+    text-decoration: none;
+  }
   .content {
     margin: 24px 16px;
     padding: 24px;
     background: #fff;
-    min-height: 740px;
-    // height: calc(100% - 200px);
+    height: calc(100vh - 200px);
+    overflow-y: scroll;
   }
   .right {
-    padding-left: 440px;
+    position: relative;
+    .header {
+      position: absolute;
+      right: 30px;
+    }
   }
   .trigger {
     font-size: 18px;
