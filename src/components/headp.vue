@@ -55,8 +55,8 @@ export default {
     width: 95px;
     height: 55px;
     .touxiang {
-      width: 55px;
-      height: 55px;
+      width: 50px;
+      height: 50px;
       border-radius: 8px;
     }
     .iconDowm {
