@@ -6,6 +6,7 @@ import Layout from '@/layouts/layout'
 import nopage from '@/view/404'
 import user from '@/view/user/index'
 import role from '@/view/role/index'
+import index from '@/view/index/index'
 
 
 
@@ -42,10 +43,11 @@ const router = new Router({
       path: '/Layout',
       name: 'Layout',
       component: Layout,
-      // redirect: '/Layout',
+      redirect: '/Layout/index',//默认展示页
       meta: {
         name: "XXX管理系统"
       },
+
       children: [
         {
           path: '/Layout/user',
@@ -56,6 +58,11 @@ const router = new Router({
           path: '/Layout/role',
           name: '/Layout/role',
           component: role
+        },
+        {
+          path: '/Layout/index',
+          name: '/Layout/index',
+          component: index
         }
       ]
     },
@@ -72,7 +79,6 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   const isLogin = window.localStorage.getItem('login') == 'true' ? true : false
-  console.log(isLogin)
   if (isLogin) {
     next()
   } else {

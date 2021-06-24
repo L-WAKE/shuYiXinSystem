@@ -1,8 +1,8 @@
 <template>
   <a-layout class="box">
     <a-layout-sider v-model="collapsed">
-      <div class="logo"></div>
-      <a-menu theme="dark" :default-selected-keys="['1']" mode="inline">
+      <div @click="goto('/Layout/index')" class="logo"></div>
+      <a-menu theme="dark" mode="inline">
         <a-menu-item key="1" @click="goto('/Layout/user')">
           <a-icon type="pie-chart" />
           <span>用户管理</span>
@@ -85,11 +85,11 @@ export default {
     text-decoration: none;
   }
   .content {
-    margin: 24px 16px;
+    margin: 24px 16px 0 16px;
     padding: 24px;
     background: #fff;
-    height: calc(100vh - 200px);
-    overflow-y: scroll;
+    // height: calc(100vh - 200px);
+    // overflow-y: scroll;
   }
   .right {
     position: relative;
@@ -109,6 +109,7 @@ export default {
     }
   }
   .logo {
+    cursor: pointer;
     height: 32px;
     background: url("../assets/image/logo.png") no-repeat;
     background-size: 100% 100%;

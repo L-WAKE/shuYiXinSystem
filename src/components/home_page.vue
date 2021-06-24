@@ -161,9 +161,9 @@ export default {
 <style lang="less" scoped>
 .box {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   min-width: 1500px;
-  transition: all 2s;
+  // transition: all 2s;
   background: url("../assets/image/home_page.jpg") no-repeat 50%;
   background-size: 100% 100%;
   .header {
