@@ -57,7 +57,7 @@
       <a-layout-content class="content">
         <router-view />
       </a-layout-content>
-      <a-layout-footer style="textAlign: center">Ant Design ©2018 Created by Ant UED</a-layout-footer>
+      <a-layout-footer class="footer">Ant Design ©2018 Created by Ant UED</a-layout-footer>
     </a-layout>
   </a-layout>
 </template>
@@ -74,7 +74,9 @@ export default {
   },
   methods: {
     goto(path) {
-      this.$router.push(path)
+      if (this.$route.path !== path) {
+        this.$router.push(path)
+      }
     }
   }
 }
@@ -85,11 +87,14 @@ export default {
     text-decoration: none;
   }
   .content {
-    margin: 24px 16px 0 16px;
     padding: 24px;
-    background: #fff;
-    // height: calc(100vh - 200px);
+    min-height: 780px;
+    overflow: hidden;
+    // height: calc(100vh - 155px);
     // overflow-y: scroll;
+  }
+  .footer {
+    text-align: center;
   }
   .right {
     position: relative;

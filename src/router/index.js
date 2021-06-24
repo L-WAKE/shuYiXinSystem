@@ -47,7 +47,6 @@ const router = new Router({
       meta: {
         name: "XXX管理系统"
       },
-
       children: [
         {
           path: '/Layout/user',

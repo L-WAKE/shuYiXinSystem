@@ -4,6 +4,7 @@ import router from './router'
 import Antd from 'ant-design-vue'
 import store from './store/store'
 import axios from 'axios'
+import './common/css/common.css'
 import 'ant-design-vue/dist/antd.css'
 import * as echarts from 'echarts';
 
