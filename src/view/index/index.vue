@@ -36,7 +36,9 @@
             </a-tooltip>
           </p>
           <p>8,846</p>
-          <p>11</p>
+          <p>
+            <a-progress :percent="88" :show-info="false" />
+          </p>
           <p>日访问量&nbsp;1,234</p>
         </li>
         <li>
@@ -50,7 +52,9 @@
             </a-tooltip>
           </p>
           <p>6,560</p>
-          <p>支付笔数</p>
+          <p class="tac">
+            <img class="paySvg" src="../../assets/icons/payNum.svg" />
+          </p>
           <p>转化率&nbsp;60%</p>
         </li>
         <li>
@@ -64,7 +68,9 @@
             </a-tooltip>
           </p>
           <p>78%</p>
-          <p>支付笔数</p>
+          <p class="effect tac">
+            <a-progress type="circle" :percent="78" />
+          </p>
           <p>
             <span>
               周同比 12%
@@ -108,11 +114,21 @@ export default {
         border-radius: 5px;
         padding: 10px 20px;
         background: #fff;
+        /deep/.effect {
+          .ant-progress-inner {
+            width: 70px !important;
+            height: 70px !important;
+          }
+        }
         p {
           margin: 0;
           .iconInfo {
             float: right;
             cursor: pointer;
+          }
+          .paySvg {
+            width: 70px;
+            height: 70px;
           }
           &:nth-of-type(2) {
             color: #000;
