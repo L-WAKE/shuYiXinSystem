@@ -36,8 +36,8 @@
             </a-tooltip>
           </p>
           <p>8,846</p>
-          <p>支付笔数</p>
-          <p>运营活动效果</p>
+          <p>11</p>
+          <p>日访问量&nbsp;1,234</p>
         </li>
         <li>
           <p>
@@ -51,7 +51,7 @@
           </p>
           <p>6,560</p>
           <p>支付笔数</p>
-          <p>运营活动效果</p>
+          <p>转化率&nbsp;60%</p>
         </li>
         <li>
           <p>
@@ -65,7 +65,16 @@
           </p>
           <p>78%</p>
           <p>支付笔数</p>
-          <p>运营活动效果</p>
+          <p>
+            <span>
+              周同比 12%
+              <a-icon style="color:red" type="caret-up" />
+            </span>&emsp;
+            <span>
+              日同比 11%
+              <a-icon style="color:#52c41a" type="caret-down" />
+            </span>
+          </p>
         </li>
       </ul>
     </div>
@@ -79,12 +88,8 @@ export default {
   data() {
     return {}
   },
-  mounted() {
-    // this.drawEarth()
-  },
-  methods: {
-    drawEarth() {}
-  }
+  mounted() {},
+  methods: {}
 }
 </script>
 <style scoped lang="less">
@@ -113,6 +118,7 @@ export default {
             color: #000;
             font-size: 30px;
             line-height: 38px;
+            width: 200px;
           }
           &:nth-of-type(3) {
             line-height: 90px;
