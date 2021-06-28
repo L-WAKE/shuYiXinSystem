@@ -23,7 +23,7 @@
               <a-icon style="color:#52c41a" type="caret-down" />
             </span>
           </p>
-          <p>运营活动效果</p>
+          <p>日均销售额￥234.5</p>
         </li>
         <li>
           <p>
@@ -115,10 +115,14 @@ export default {
             line-height: 38px;
           }
           &:nth-of-type(3) {
-            line-height: 70px;
+            line-height: 90px;
             span {
               color: #595959;
             }
+          }
+          &:nth-of-type(4) {
+            border-top: 1px solid #e8e8e8;
+            padding-top: 8px;
           }
           &:first-of-type {
             color: #8c8c8c;

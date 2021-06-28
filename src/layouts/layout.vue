@@ -90,6 +90,7 @@ export default {
     padding: 24px;
     min-height: 780px;
     overflow: hidden;
+    // min-width: 1024px;
     // height: calc(100vh - 155px);
     // overflow-y: scroll;
   }
