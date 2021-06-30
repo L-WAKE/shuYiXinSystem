@@ -84,22 +84,85 @@
         </li>
       </ul>
     </div>
-    <div class="switch"></div>
+    <div class="switch mt20">
+      <div ref="switch" :style="{width: '1034px', height: '254px'}"></div>
+    </div>
     <div class="circular"></div>
   </div>
 </template>
 <script>
-import "echarts-gl"
 export default {
   data() {
     return {}
   },
-  mounted() {},
-  methods: {}
+  mounted() {
+    this.drawEcharts()
+  },
+  methods: {
+    drawEcharts() {
+      let myEcharts = this.$echarts.init(this.$refs.switch)
+      let option = {
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            // 坐标轴指示器，坐标轴触发有效
+            type: "shadow" // 默认为直线，可选为：'line' | 'shadow'
+          }
+        },
+        grid: {
+          left: "3%",
+          right: "4%",
+          bottom: "3%",
+          containLabel: true
+        },
+        xAxis: [
+          {
+            type: "category",
+            data: [
+              "一月",
+              "二月",
+              "三月",
+              "四月",
+              "五月",
+              "六月",
+              "七月",
+              "八月",
+              "九月",
+              "十月",
+              "十一月",
+              "十二月"
+            ],
+            axisTick: {
+              alignWithLabel: true
+            }
+          }
+        ],
+        yAxis: [
+          {
+            type: "value"
+          }
+        ],
+        series: [
+          {
+            name: "y",
+            itemStyle: {
+              color: "#3aa1ff"
+            },
+            type: "bar",
+            barWidth: "60%",
+            data: [1032, 632, 616, 332, 546, 610, 918, 842, 458, 514, 705, 975]
+          }
+        ]
+      }
+      myEcharts && myEcharts.setOption(option)
+    }
+  }
 }
 </script>
 <style scoped lang="less">
 .box {
+  display: flex;
+  flex-direction: column;
   .card {
     ul {
       margin: 0;
@@ -110,7 +173,6 @@ export default {
         width: 24%;
         height: 200px;
         margin-left: 21px;
-        background: gray;
         border-radius: 5px;
         padding: 10px 20px;
         background: #fff;
@@ -155,6 +217,10 @@ export default {
         }
       }
     }
+  }
+  .switch {
+    background: #fff;
+    min-height: 410px;
   }
 }
 </style>

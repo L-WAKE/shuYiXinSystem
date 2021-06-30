@@ -6,6 +6,8 @@ import store from './store/store'
 import axios from 'axios'
 import './common/css/common.css'
 import 'ant-design-vue/dist/antd.css'
+import * as echarts from 'echarts'
+Vue.prototype.$echarts = echarts
 
 Vue.use(Antd)
 

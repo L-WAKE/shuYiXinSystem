@@ -19,49 +19,38 @@ const router = new Router({
       path: '/',
       name: 'Login',
       component: Login,
-      meta: {
-        name: "用户登录"
-      }
-    },
-    {
+      meta: { name: "用户登录" }
+    }, {
       path: '/Login',
       name: 'Login',
       component: Login,
-      meta: {
-        name: "用户登录"
-      }
-    },
-    {
+      meta: { name: "用户登录" }
+    }, {
       path: '/Home',
       name: 'Home',
       component: Home,
-      meta: {
-        name: "首页"
-      }
-    },
-    {
+      meta: { name: "首页" }
+    }, {
       path: '/Layout',
       name: 'Layout',
       component: Layout,
       redirect: '/Layout/index',//默认展示页
-      meta: {
-        name: "XXX管理系统"
-      },
       children: [
-        {
-          path: '/Layout/user',
-          name: '/Layout/user',
-          component: user
-        },
-        {
-          path: '/Layout/role',
-          name: '/Layout/role',
-          component: role
-        },
         {
           path: '/Layout/index',
           name: '/Layout/index',
-          component: index
+          component: index,
+          meta: { name: "XXX管理系统" },
+        }, {
+          path: '/Layout/user',
+          name: '/Layout/user',
+          component: user,
+          meta: { name: "用户管理" },
+        }, {
+          path: '/Layout/role',
+          name: '/Layout/role',
+          component: role,
+          meta: { name: "角色管理" },
         }
       ]
     },
@@ -69,9 +58,7 @@ const router = new Router({
       path: '*',
       name: '404',
       component: nopage,
-      meta: {
-        name: "404"
-      }
+      meta: { name: "404" }
     }
   ]
 })
