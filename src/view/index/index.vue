@@ -102,16 +102,6 @@
             </a-col>
           </a-row>
         </a-tab-pane>
-        <a-tab-pane key="2" tab="访问量">
-          <a-row>
-            <a-col :span="16">
-              <p class="sale">销售趋势</p>
-              <div ref="switch" :style="{width: '1044px', height: '274px'}"></div>
-            </a-col>
-            <a-col :span="8">col-12</a-col>
-          </a-row>
-        </a-tab-pane>
-
         <div class="wrapper" slot="tabBarExtraContent">
           <div class="label">
             <span>今日</span>
@@ -132,22 +122,15 @@
 export default {
   data() {
     return {
-      salesVolume: [
-        { id: 1, name: "傻傻的是是是1", salesVolume: 1232 },
-        { id: 2, name: "傻傻的是是是2", salesVolume: 1231 },
-        { id: 3, name: "傻傻的是是是3", salesVolume: 1222 },
-        { id: 4, name: "傻傻的是是是4", salesVolume: 1255 },
-        { id: 5, name: "傻傻的是是是5", salesVolume: 1233 },
-        { id: 6, name: "傻傻的是是是6", salesVolume: 1244 },
-        { id: 7, name: "傻傻的是是是7", salesVolume: 1212 }
-      ]
+      salesVolume: [],
+      rawData: null
     }
   },
   mounted() {
-    this.drawEcharts() //销售趋势echarts图
+    this.drawEcharts() //销售趋势echarts
   },
   created() {
-    // this.getVolume() //销售排名数据
+    this.getVolume() //销售排名数据
   },
   computed: {
     //销售排名数据进行排序
@@ -158,6 +141,7 @@ export default {
     }
   },
   methods: {
+    // 画销售额echarts
     drawEcharts() {
       let myEcharts = this.$echarts.init(this.$refs.switch)
       let option = {
@@ -213,21 +197,21 @@ export default {
           }
         ]
       }
-      myEcharts && myEcharts.setOption(option)
+      option && myEcharts.setOption(option)
     },
+    // 获取销售排名数据
     getVolume() {
       this.$axios
         .get(
           "https://www.fastmock.site/mock/f3b81b200dc63043749d69ed922a7277/test/sale"
         )
         .then(res => {
-          // this.salesVolume = res.data.data.list
+          this.salesVolume = res.data.data.list
         })
         .catch(e => {
           console.log(e)
         })
     },
-
     // 开始结束日期变化
     timeChange(date, dateString) {
       console.log(date, dateString)
