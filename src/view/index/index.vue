@@ -85,7 +85,45 @@
       </ul>
     </div>
     <div class="switch mt20">
-      <div ref="switch" :style="{width: '1034px', height: '254px'}"></div>
+      <a-tabs default-active-key="1">
+        <a-tab-pane key="1" tab="销售额">
+          <a-row>
+            <a-col :span="16">
+              <p class="sale">销售趋势</p>
+              <div ref="switch" :style="{width: '1044px', height: '274px'}"></div>
+            </a-col>
+            <a-col :span="8">
+              <p class="sale" style="margin-left: 0">门店销售额排名</p>
+              <div class="ranking" v-for="(item,index) in sortData" :key="item.id">
+                <span :class="index===0||index===1||index===2?'active':''">{{index+1}}</span>
+                <span>{{item.name}}</span>
+                <span>{{item.salesVolume}}</span>
+              </div>
+            </a-col>
+          </a-row>
+        </a-tab-pane>
+        <a-tab-pane key="2" tab="访问量">
+          <a-row>
+            <a-col :span="16">
+              <p class="sale">销售趋势</p>
+              <div ref="switch" :style="{width: '1044px', height: '274px'}"></div>
+            </a-col>
+            <a-col :span="8">col-12</a-col>
+          </a-row>
+        </a-tab-pane>
+
+        <div class="wrapper" slot="tabBarExtraContent">
+          <div class="label">
+            <span>今日</span>
+            <span>本周</span>
+            <span>本月</span>
+            <span>全年</span>
+          </div>
+          <span class="picker">
+            <a-range-picker :placeholder="['开始日期', '结束日期']" @change="timeChange" />
+          </span>
+        </div>
+      </a-tabs>
     </div>
     <div class="circular"></div>
   </div>
@@ -93,10 +131,31 @@
 <script>
 export default {
   data() {
-    return {}
+    return {
+      salesVolume: [
+        { id: 1, name: "傻傻的是是是1", salesVolume: 1232 },
+        { id: 2, name: "傻傻的是是是2", salesVolume: 1231 },
+        { id: 3, name: "傻傻的是是是3", salesVolume: 1222 },
+        { id: 4, name: "傻傻的是是是4", salesVolume: 1255 },
+        { id: 5, name: "傻傻的是是是5", salesVolume: 1233 },
+        { id: 6, name: "傻傻的是是是6", salesVolume: 1244 },
+        { id: 7, name: "傻傻的是是是7", salesVolume: 1212 }
+      ]
+    }
   },
   mounted() {
-    this.drawEcharts()
+    this.drawEcharts() //销售趋势echarts图
+  },
+  created() {
+    // this.getVolume() //销售排名数据
+  },
+  computed: {
+    //销售排名数据进行排序
+    sortData() {
+      return this.salesVolume.sort(
+        (a, b) => b["salesVolume"] - a["salesVolume"]
+      )
+    }
   },
   methods: {
     drawEcharts() {
@@ -105,14 +164,14 @@ export default {
         tooltip: {
           trigger: "axis",
           axisPointer: {
-            // 坐标轴指示器，坐标轴触发有效
             type: "shadow" // 默认为直线，可选为：'line' | 'shadow'
           }
         },
         grid: {
-          left: "3%",
-          right: "4%",
-          bottom: "3%",
+          left: 20,
+          right: 10,
+          bottom: 10,
+          top: 20,
           containLabel: true
         },
         xAxis: [
@@ -155,6 +214,23 @@ export default {
         ]
       }
       myEcharts && myEcharts.setOption(option)
+    },
+    getVolume() {
+      this.$axios
+        .get(
+          "https://www.fastmock.site/mock/f3b81b200dc63043749d69ed922a7277/test/sale"
+        )
+        .then(res => {
+          // this.salesVolume = res.data.data.list
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    },
+
+    // 开始结束日期变化
+    timeChange(date, dateString) {
+      console.log(date, dateString)
     }
   }
 }
@@ -220,7 +296,44 @@ export default {
   }
   .switch {
     background: #fff;
+    padding: 10px 20px;
     min-height: 410px;
+    .wrapper {
+      .label {
+        display: inline-block;
+        span {
+          margin-left: 24px;
+          color: #f5222d;
+          cursor: pointer;
+        }
+      }
+      .picker {
+        margin-left: 24px;
+      }
+    }
+    .sale {
+      margin: 10px 0 10px 20px;
+      color: #000;
+    }
+    .ranking {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: 10% 75% 15%;
+      span:first-of-type {
+        border-radius: 20px;
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 20px;
+        width: 20px;
+        text-align: center;
+        background-color: #f5f5f5;
+      }
+      .active {
+        background-color: #314659 !important;
+        color: #fff;
+      }
+    }
   }
 }
 </style>
