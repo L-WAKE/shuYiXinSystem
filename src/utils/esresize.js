@@ -1,3 +1,7 @@
+
+/*********给echarts设置自适应大小**************/
+
+
 var EleResize = {
     _handleResize: function (e) {
         var ele = e.target || e.srcElement

@@ -90,7 +90,7 @@
           <a-row>
             <a-col :span="16">
               <p class="sale">销售趋势</p>
-              <div id="switch" ref="switch" :style="{width: '100%', height: '274px'}"></div>
+              <div ref="switch" class="switchSale"></div>
             </a-col>
             <a-col :span="8">
               <p class="sale" style="margin-left: 0">门店销售额排名</p>
@@ -152,9 +152,7 @@ export default {
   methods: {
     // 画销售额echarts
     drawEcharts() {
-      // let myEcharts = this.$echarts.init(this.$refs.switch)
-      let myEcharts = this.$echarts.init(document.getElementById("switch"))
-
+      let myEcharts = this.$echarts.init(this.$refs.switch)
       let option = {
         tooltip: {
           trigger: "axis",
@@ -212,7 +210,7 @@ export default {
       let listener = function() {
         myEcharts.resize()
       }
-      EleResize.on(document.getElementById("switch"), listener)
+      EleResize.on(this.$refs.switch, listener)
     },
     // 获取销售排名数据
     getVolume() {
@@ -313,6 +311,10 @@ export default {
     .sale {
       margin: 10px 0 10px 20px;
       color: #000;
+    }
+    .switchSale {
+      min-height: 274px;
+      max-width: 1050px;
     }
     .ranking {
       margin-top: 20px;
