@@ -90,7 +90,7 @@
           <a-row>
             <a-col :span="16">
               <p class="sale">销售趋势</p>
-              <div ref="switch" :style="{width: '1044px', height: '274px'}"></div>
+              <div id="switch" ref="switch" :style="{width: '100%', height: '274px'}"></div>
             </a-col>
             <a-col :span="8">
               <p class="sale" style="margin-left: 0">门店销售额排名</p>
@@ -115,15 +115,24 @@
         </div>
       </a-tabs>
     </div>
-    <div class="circular"></div>
+    <div class="circular mt20">
+      <a-row>
+        <a-col :span="12">
+          <div class="hot">
+            <p class="hotTit">线上热门搜索</p>
+          </div>
+        </a-col>
+        <a-col :span="12">col-12</a-col>
+      </a-row>
+    </div>
   </div>
 </template>
 <script>
+import { EleResize } from "../../utils/esresize"
 export default {
   data() {
     return {
-      salesVolume: [],
-      rawData: null
+      salesVolume: []
     }
   },
   mounted() {
@@ -143,7 +152,9 @@ export default {
   methods: {
     // 画销售额echarts
     drawEcharts() {
-      let myEcharts = this.$echarts.init(this.$refs.switch)
+      // let myEcharts = this.$echarts.init(this.$refs.switch)
+      let myEcharts = this.$echarts.init(document.getElementById("switch"))
+
       let option = {
         tooltip: {
           trigger: "axis",
@@ -198,6 +209,10 @@ export default {
         ]
       }
       option && myEcharts.setOption(option)
+      let listener = function() {
+        myEcharts.resize()
+      }
+      EleResize.on(document.getElementById("switch"), listener)
     },
     // 获取销售排名数据
     getVolume() {
@@ -316,6 +331,20 @@ export default {
       .active {
         background-color: #314659 !important;
         color: #fff;
+      }
+    }
+  }
+  .circular {
+    .hot {
+      background: #fff;
+      padding: 10px 20px;
+      width: 788px;
+      height: 465px;
+      .hotTit {
+        font-size: 16px;
+        color: #000;
+        border-bottom: 1px solid #e8e8e8;
+        padding-bottom: 15px;
       }
     }
   }
