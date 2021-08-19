@@ -68,7 +68,7 @@ export default {
     getUser() {
       return this.$axios
         .get(
-          "https://www.fastmock.site/mock/f3b81b200dc63043749d69ed922a7277/test/user"
+          "https://www.fastmock.site/mock/f3b81b200dc63043749d69ed922a7277/shopManage/user"
         )
         .then(res => {
           return res.data.data

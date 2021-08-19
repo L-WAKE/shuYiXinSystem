@@ -213,17 +213,14 @@ export default {
       EleResize.on(this.$refs.switch, listener)
     },
     // 获取销售排名数据
-    getVolume() {
-      this.$axios
-        .get(
-          "https://www.fastmock.site/mock/f3b81b200dc63043749d69ed922a7277/test/sale"
-        )
-        .then(res => {
-          this.salesVolume = res.data.data.list
-        })
-        .catch(e => {
-          console.log(e)
-        })
+    async getVolume() {
+      let params = {
+        id: 12233
+      }
+      let { data, status } = await this.$api.getRanking(params)
+      if (status === 200) {
+        this.salesVolume = data.data.list
+      }
     },
     // 开始结束日期变化
     timeChange(date, dateString) {
@@ -238,14 +235,14 @@ export default {
   flex-direction: column;
   .card {
     ul {
+      display: flex;
+      justify-content: space-around;
       margin: 0;
       padding: 0;
       li {
-        float: left;
         list-style: none;
         width: 24%;
         height: 200px;
-        margin-left: 21px;
         border-radius: 5px;
         padding: 10px 20px;
         background: #fff;

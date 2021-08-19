@@ -4,6 +4,7 @@ import router from './router'
 import Antd from 'ant-design-vue'
 import store from './store/store'
 import axios from 'axios'
+import api from "./api/index"
 import './common/css/common.css'
 import 'ant-design-vue/dist/antd.css'
 import * as echarts from 'echarts'
@@ -14,7 +15,7 @@ import 'moment/locale/zh-cn';
 moment.locale('zh-cn');
 
 //
-
+Vue.prototype.$api = api
 Vue.prototype.$echarts = echarts
 
 Vue.use(Antd)
