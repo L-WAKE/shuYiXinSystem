@@ -65,36 +65,28 @@ export default {
     return {}
   },
   methods: {
-    getUser() {
-      return this.$axios
-        .get(
-          "https://www.fastmock.site/mock/f3b81b200dc63043749d69ed922a7277/shopManage/user"
-        )
-        .then(res => {
-          return res.data.data
-        })
-    },
-
     async handleSubmit(e) {
       e.preventDefault()
-      let userData = await this.getUser()
+      let { data } = await this.$api.login()
       this.form.validateFields((err, values) => {
         if (!err) {
-          if (
-            values.userName === userData.userName &&
-            values.password === userData.password
-          ) {
-            window.localStorage.setItem("login", "true")
-            this.$router.push("/Home")
-            setTimeout(() => {
-              this.$notification.open({
-                message: "welcome",
-                description: `${timeSlot()}欢迎回来`,
-                icon: <a-icon type="smile" style="color: #108ee9" />
-              })
-            }, 1000)
-          } else {
-            this.$message.error("用户名或密码错误!")
+          if (data.code === 200) {
+            if (
+              values.userName === data.data.userName &&
+              values.password === data.data.password
+            ) {
+              window.localStorage.setItem("login", "true")
+              this.$router.push("/Home")
+              setTimeout(() => {
+                this.$notification.open({
+                  message: "welcome",
+                  description: `${timeSlot()}欢迎回来`,
+                  icon: <a-icon type="smile" style="color: #108ee9" />
+                })
+              }, 1000)
+            } else {
+              this.$message.error("用户名或密码错误!")
+            }
           }
         }
       })

@@ -217,8 +217,8 @@ export default {
       let params = {
         id: 12233
       }
-      let { data, status } = await this.$api.getRanking(params)
-      if (status === 200) {
+      let { data } = await this.$api.getRanking(params)
+      if (data.code === 200) {
         this.salesVolume = data.data.list
       }
     },

@@ -3,5 +3,6 @@ export const GET = "get";
 export const POST = "post";
 
 export const path = { //地址的封装
-    ranking: "/sale"
+    ranking: "/sale",
+    login:"/login"
 }
