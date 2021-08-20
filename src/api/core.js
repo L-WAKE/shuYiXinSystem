@@ -1,5 +1,5 @@
 //网络模块核心代码
-import axios from "axios";//注:别忘了引入axios
+import axios from "axios";
 import { GET, POST } from "./config";
 
 
