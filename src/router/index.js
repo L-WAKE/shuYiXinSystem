@@ -7,6 +7,10 @@ import nopage from '@/view/404'
 import user from '@/view/user/index'
 import role from '@/view/role/index'
 import index from '@/view/index/index'
+import myApply from '@/view/flow/myApply'
+import myTodo from '@/view/flow/myTodo'
+import myHave from '@/view/flow/myHave'
+
 
 
 
@@ -51,6 +55,29 @@ const router = new Router({
           name: '/Layout/role',
           component: role,
           meta: { name: "角色管理" },
+        }, {
+          path: '/Layout/flow',
+          name: '/Layout/flow',
+          component: myApply,
+          redirect: '/Layout/flow/myApply',//默认展示页
+          children: [
+            {
+              path: '/Layout/flow/myApply',
+              name: '/Layout/flow/myApply',
+              component: myApply,
+              meta: { name: "我的申请" }
+            }, {
+              path: '/Layout/flow/myTodo',
+              name: '/Layout/flow/myTodo',
+              component: myTodo,
+              meta: { name: "我的代办" }
+            }, {
+              path: '/Layout/flow/myHave',
+              name: '/Layout/flow/myHave',
+              component: myHave,
+              meta: { name: "我的已办" }
+            }
+          ]
         }
       ]
     },

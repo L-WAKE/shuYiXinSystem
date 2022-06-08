@@ -74,7 +74,6 @@ export default {
       title: "供不应绝 更上层楼",
       xinyong: "信用查询 / 指标治理 / 决策辅助",
       index: 0,
-
       zxActive: true,
       zbActive: true,
       jcActive: true,

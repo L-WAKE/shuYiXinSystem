@@ -11,14 +11,14 @@
           <a-icon type="desktop" />
           <span>角色管理</span>
         </a-menu-item>
-        <a-sub-menu key="sub1">
+        <a-sub-menu key="sub1" @click="goto('/Layout/flow')">
           <span slot="title">
             <a-icon type="user" />
             <span>流程管理</span>
           </span>
-          <a-menu-item key="3">我的申请</a-menu-item>
-          <a-menu-item key="4">我的待办</a-menu-item>
-          <a-menu-item key="5">我的已办</a-menu-item>
+          <a-menu-item @click="goto('/Layout/flow/myApply')" key="3">我的申请</a-menu-item>
+          <a-menu-item @click="goto('/Layout/flow/myTodo')" key="4">我的待办</a-menu-item>
+          <a-menu-item @click="goto('/Layout/flow/myHave')" key="5">我的已办</a-menu-item>
         </a-sub-menu>
         <a-sub-menu key="sub2">
           <span slot="title">
@@ -90,9 +90,6 @@ export default {
     padding: 24px;
     min-height: 780px;
     overflow: hidden;
-    // min-width: 1024px;
-    // height: calc(100vh - 155px);
-    // overflow-y: scroll;
   }
   .footer {
     text-align: center;
