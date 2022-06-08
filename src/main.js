@@ -13,6 +13,7 @@ import moment from 'moment';
 import locale from 'ant-design-vue/lib/locale-provider/zh_CN';
 import 'moment/locale/zh-cn';
 moment.locale('zh-cn');
+import dynamicRotuer from "../src/router/router-all-dynamic"
 
 //
 Vue.prototype.$api = api
@@ -27,12 +28,15 @@ Vue.config.productionTip = false
 
 
 // 跳转时修改标题
-router.beforeEach((to, from, next) => {
-  if (to.meta.name) {
-    document.title = to.meta.name
-  }
-  next()
-})
+// router.beforeEach((to, from, next) => {
+//   if (to.meta.name) {
+//     document.title = to.meta.name
+//   }
+//   console.log(dynamicRotuer)
+//   // router.addRoutes(dynamicRotuer);
+//   next()
+// })
+
 
 new Vue({
   el: '#app',

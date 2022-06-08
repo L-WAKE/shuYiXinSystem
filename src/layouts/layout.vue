@@ -3,35 +3,16 @@
     <a-layout-sider v-model="collapsed">
       <div @click="goto('/Layout/index')" class="logo"></div>
       <a-menu theme="dark" mode="inline">
-        <a-menu-item key="1" @click="goto('/Layout/user')">
-          <a-icon type="pie-chart" />
-          <span>用户管理</span>
-        </a-menu-item>
-        <a-menu-item key="2" @click="goto('/Layout/role')">
-          <a-icon type="desktop" />
-          <span>角色管理</span>
-        </a-menu-item>
-        <a-sub-menu key="sub1" @click="goto('/Layout/flow')">
-          <span slot="title">
-            <a-icon type="user" />
-            <span>流程管理</span>
-          </span>
-          <a-menu-item @click="goto('/Layout/flow/myApply')" key="3">我的申请</a-menu-item>
-          <a-menu-item @click="goto('/Layout/flow/myTodo')" key="4">我的待办</a-menu-item>
-          <a-menu-item @click="goto('/Layout/flow/myHave')" key="5">我的已办</a-menu-item>
-        </a-sub-menu>
-        <a-sub-menu key="sub2">
-          <span slot="title">
-            <a-icon type="team" />
-            <span>客户管理</span>
-          </span>
-          <a-menu-item key="6">积分配置</a-menu-item>
-          <a-menu-item key="8">积分明细</a-menu-item>
-        </a-sub-menu>
-        <a-menu-item key="9">
-          <a-icon type="file" />
-          <span>字典管理</span>
-        </a-menu-item>
+        <template v-for="item in sidebarMenu">
+          <template v-if="item.children&&item.children.length>0">
+            <template v-for="(menu,index) in item.children.slice(1,item.children.length)">
+              <a-menu-item :key="index" @click="goto(menu.path)">
+                <a-icon :type="menu.icon?menu.icon:'pie-chart'" />
+                <span>{{menu.meta.name}}</span>
+              </a-menu-item>
+            </template>
+          </template>
+        </template>
       </a-menu>
     </a-layout-sider>
     <a-layout>
@@ -63,6 +44,7 @@
 </template>
 <script>
 import HeadPint from "@/components/headp.vue"
+import { mapState } from "vuex"
 export default {
   components: {
     HeadPint
@@ -72,11 +54,15 @@ export default {
       collapsed: false
     }
   },
+  computed: {
+    ...mapState(["sidebarMenu"])
+  },
+  created() {
+    console.log(this.$router.options.routes, "this.$router.options.routes")
+  },
   methods: {
     goto(path) {
-      if (this.$route.path !== path) {
-        this.$router.push(path)
-      }
+      this.$router.push(path)
     }
   }
 }

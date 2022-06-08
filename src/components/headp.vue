@@ -38,10 +38,12 @@ export default {
         console.log("跳转到修改密码页")
       }
       if (name === "退出登录") {
-        this.$router.push("/login")
+        this.$store.commit("CLEAR_MENU")
         window.localStorage.setItem("login", "false")
-
-        console.log("执行退出登录逻辑")
+        this.$router.replace("/login")
+        setTimeout(() => {
+          location.reload()
+        }, 100)
       }
     }
   }

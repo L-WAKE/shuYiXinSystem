@@ -67,29 +67,31 @@ export default {
   methods: {
     async handleSubmit(e) {
       e.preventDefault()
-      let { data } = await this.$api.login()
-      this.form.validateFields((err, values) => {
-        if (!err) {
-          if (data.code === 200) {
-            if (
-              values.userName === data.data.userName &&
-              values.password === data.data.password
-            ) {
-              window.localStorage.setItem("login", "true")
-              this.$router.push("/Home")
-              setTimeout(() => {
-                this.$notification.open({
-                  message: "welcome",
-                  description: `${timeSlot()}欢迎回来`,
-                  icon: <a-icon type="smile" style="color: #108ee9" />
-                })
-              }, 1000)
-            } else {
-              this.$message.error("用户名或密码错误!")
-            }
-          }
-        }
-      })
+      this.$router.push("/Home")
+
+      // let { data } = await this.$api.login()
+      // this.form.validateFields((err, values) => {
+      //   if (!err) {
+      //     if (data.code === 200) {
+      //       if (
+      //         values.userName === data.data.userName &&
+      //         values.password === data.data.password
+      //       ) {
+      //         window.localStorage.setItem("login", "true")
+      //         this.$router.push("/Home")
+      //         setTimeout(() => {
+      //           this.$notification.open({
+      //             message: "welcome",
+      //             description: `${timeSlot()}欢迎回来`,
+      //             icon: <a-icon type="smile" style="color: #108ee9" />
+      //           })
+      //         }, 1000)
+      //       } else {
+      //         this.$message.error("用户名或密码错误!")
+      //       }
+      //     }
+      //   }
+      // })
     }
   },
   computed: {}
