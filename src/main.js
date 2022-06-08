@@ -25,7 +25,7 @@ Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 
 
-
+Vue.prototype.$store = store
 
 // 跳转时修改标题
 // router.beforeEach((to, from, next) => {

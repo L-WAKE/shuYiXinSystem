@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
     username: 'admin',
     password: 123456,
@@ -20,3 +20,5 @@ export default new Vuex.Store({
   actions: {},
   getters: {}
 })
+
+export default store

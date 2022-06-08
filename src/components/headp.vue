@@ -23,6 +23,7 @@
   </div>
 </template>
 <script>
+import store from "../store/store"
 export default {
   data() {
     return {}
@@ -38,7 +39,8 @@ export default {
         console.log("跳转到修改密码页")
       }
       if (name === "退出登录") {
-        this.$store.commit("CLEAR_MENU")
+        store.commit("CLEAR_MENU")
+        console.log(this.$store)
         window.localStorage.setItem("login", "false")
         this.$router.replace("/login")
         setTimeout(() => {

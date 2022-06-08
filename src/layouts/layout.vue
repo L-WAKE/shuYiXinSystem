@@ -58,7 +58,8 @@ export default {
     ...mapState(["sidebarMenu"])
   },
   created() {
-    console.log(this.$router.options.routes, "this.$router.options.routes")
+    console.log(this.sidebarMenu, "sidebarMenu")
+    console.log(this.$store, "store")
   },
   methods: {
     goto(path) {

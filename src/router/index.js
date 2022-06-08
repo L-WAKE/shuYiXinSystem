@@ -34,13 +34,13 @@ router.beforeEach((to, from, next) => {
 })
 
 /*解决重复点击路由报错问题*/
-// const vueRouterPush = Router.prototype.push
-// Router.prototype.push = function push(to) {
-//   return vueRouterPush.call(this, to).catch(err => err)
-// }
-// const vueRouterReplace = Router.prototype.replace
-// Router.prototype.replace = function replace(to) {
-//   return vueRouterReplace.call(this, to).catch(err => err)
-// }
+const vueRouterPush = Router.prototype.push
+Router.prototype.push = function push(to) {
+  return vueRouterPush.call(this, to).catch(err => err)
+}
+const vueRouterReplace = Router.prototype.replace
+Router.prototype.replace = function replace(to) {
+  return vueRouterReplace.call(this, to).catch(err => err)
+}
 
 export default router
