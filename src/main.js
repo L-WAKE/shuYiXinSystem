@@ -8,39 +8,41 @@ import api from "./api/index"
 import './common/css/common.css'
 import 'ant-design-vue/dist/antd.css'
 import * as echarts from 'echarts'
-//日期控件的英文转成中文
-import moment from 'moment';
-import locale from 'ant-design-vue/lib/locale-provider/zh_CN';
-import 'moment/locale/zh-cn';
-moment.locale('zh-cn');
-import dynamicRotuer from "../src/router/router-all-dynamic"
+import VueI18n from 'vue-i18n'
+
+// 从语言包文件中导入语言包对象
+import i18n_zh from '../src/assets/international/i18n_zh'
+import i18n_en from '../src/assets/international/i18n_en'
 
 //
 Vue.prototype.$api = api
 Vue.prototype.$echarts = echarts
-
+Vue.use(VueI18n)
 Vue.use(Antd)
 
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
-
-
 Vue.prototype.$store = store
 
-// 跳转时修改标题
-// router.beforeEach((to, from, next) => {
-//   if (to.meta.name) {
-//     document.title = to.meta.name
-//   }
-//   console.log(dynamicRotuer)
-//   // router.addRoutes(dynamicRotuer);
-//   next()
-// })
+const messages = {
+  zh: {
+    ...i18n_zh
+  },
+  en: {
+    ...i18n_en
+  },
+}
+
+const i18n = new VueI18n({
+  locale: 'zh', // 语言标识
+  messages
+})
 
 
 new Vue({
   el: '#app',
   router,
+  i18n,
   store,
   components: { App },
   template: '<App/>'

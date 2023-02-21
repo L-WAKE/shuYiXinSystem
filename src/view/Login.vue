@@ -2,55 +2,55 @@
   <div class="container">
     <div class="top">
       <img src="../assets/image/logo_index.png" />
-      <span>XXX邮箱</span>
+      <span>XXX{{ $t('i18n0') }}</span>
     </div>
     <div class="main">
-      <h2 class="title">账号登录</h2>
+      <h2 class="title">{{ $t('i18n1') }}</h2>
       <div class="content">
         <a-form :form="form" @submit="handleSubmit">
           <a-form-item>
             <a-input
               v-decorator="[
           'userName',
-          { rules: [{ required: true, message: '请输入用户名!' }] },
+          { rules: [{ required: true, message: $t('i18n2') + '!' }] },
         ]"
-              placeholder="请输入用户名"
+              :placeholder="$t('i18n2')"
             >
               <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
             </a-input>
           </a-form-item>
           <a-form-item>
             <a-input
-              v-decorator="['password',{ rules: [{ required: true, message: '请输入密码!' }] },]"
+              v-decorator="['password',{ rules: [{ required: true, message: $t('i18n3') + '!' }] },]"
               type="password"
-              placeholder="请输入密码"
+              :placeholder="$t('i18n3')"
             >
               <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)" />
             </a-input>
           </a-form-item>
           <a-row>
-            <a-checkbox>自动登录</a-checkbox>
-            <a class="forget" href="javascript:void(0);">忘记密码</a>
+            <a-checkbox>{{ $t('i18n4') }}</a-checkbox>
+            <a class="forget" href="javascript:void(0);">{{ $t('i18n5') }}</a>
           </a-row>
-          <a-button html-type="submit" type="primary">登录</a-button>
+          <a-button html-type="submit" type="primary">{{ $t('i18n6') }}</a-button>
         </a-form>
         <div class="other-login">
-          <span>其他登录方式</span>
+          <span>{{ $t('i18n7') }}</span>
           <a-icon class="item-icon" type="alipay-circle"></a-icon>
           <a-icon class="item-icon" type="taobao-circle"></a-icon>
           <a-icon class="item-icon" type="weibo-circle"></a-icon>
-          <router-link class="register" :to="{ name: 'Home' }">注册账户</router-link>
+          <router-link class="register" :to="{ name: 'Home' }">{{ $t('i18n8') }}</router-link>
         </div>
       </div>
     </div>
     <div class="footer">
       <div class="links">
-        <a href="javascript:void(0);">帮助</a>
-        <a href="javascript:void(0);">隐私</a>
-        <a href="javascript:void(0);">条款</a>
+        <a href="javascript:void(0);">{{ $t('i18n9') }}</a>
+        <a href="javascript:void(0);">{{ $t('i18n10') }}</a>
+        <a href="javascript:void(0);">{{ $t('i18n11') }}</a>
       </div>
       <div class="copyright">Copyright &copy; 2021 six six six</div>
-      <div class="copyright">互联网药品信息服务资格证书（浙）-经营性-2018-0010 | 出版物网络交易平台服务经营备案号：新出发浙备字第002号</div>
+      <div class="copyright">{{ $t('i18n12') }} | {{ $t('i18n13') }}</div>
     </div>
   </div>
 </template>
