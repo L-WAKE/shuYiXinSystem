@@ -9,12 +9,13 @@ import './common/css/common.css'
 import 'ant-design-vue/dist/antd.css'
 import * as echarts from 'echarts'
 import VueI18n from 'vue-i18n'
-
+import Print from 'vue-print-nb'
 // 从语言包文件中导入语言包对象
 import i18n_zh from '../src/assets/international/i18n_zh'
 import i18n_en from '../src/assets/international/i18n_en'
 
 //
+Vue.use(Print);
 Vue.prototype.$api = api
 Vue.prototype.$echarts = echarts
 Vue.use(VueI18n)
