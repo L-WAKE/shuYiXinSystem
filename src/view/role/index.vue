@@ -4,7 +4,7 @@
       角色管理<a-button type="primary" v-print="'#table'">打印</a-button>
       <!-- @click="gotoPrint" -->
     </div>
-    <div id="table">
+    <div id="table" class="table" style="margin-top: 500px">
       <a-table ref="table" :dataSource="dataSource" :columns="columns" />
     </div>
   </div>
@@ -134,3 +134,27 @@ export default {
   },
 };
 </script>
+<style scoped lang="less">
+@media print {
+  @page {
+    margin: 1cm;
+    size: A3 portrait;
+    color-adjust: exact; /*保留底色*/
+    /* 指定页面方向portrait 纵/landscape 横*/
+  }
+  .table {
+    page-break-inside: avoid; /*避免在中间破坏图像和表格*/
+    page-break-after: always; /*设置打印分页*/
+    margin-top: 0 !important;
+    /* transform: scale(0.8); */
+  }
+  table,
+  figure {
+    page-break-inside: avoid;
+  }
+  .itemHead {
+    opacity: 0;
+    /* display: none !important; */
+  }
+}
+</style>
