@@ -8,6 +8,9 @@
 # install dependencies
 npm install
 
+# 执行国际化翻译脚本 - 注意首先要配置i18n.config.js 里面的id 及各种配置项
+rep
+
 # serve with hot reload at localhost:8080
 npm run dev
 

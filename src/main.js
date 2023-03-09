@@ -13,7 +13,8 @@ import Print from 'vue-print-nb'
 // 从语言包文件中导入语言包对象
 import i18n_zh from '../src/assets/international/i18n_zh'
 import i18n_en from '../src/assets/international/i18n_en'
-
+import _ from 'lodash'
+Vue.prototype._ = _
 //
 Vue.use(Print);
 Vue.prototype.$api = api
