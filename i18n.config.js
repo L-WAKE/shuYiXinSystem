@@ -1,6 +1,6 @@
 module.exports = {
   delay: 1500, // 自动翻译延时，必须大于 1000 ms，否则调用百度翻译 API 会失败
-  mapFile: 'i18nmap.js', // 需要生成默认 map 的文件
+  mapFile: 'i18nmap.js', // 需要的映射文件
   appid: '', // 百度翻译 appid
   key: '', // 百度翻译密钥
   output: 'i18n.data.js', // i18n 输出文件
@@ -8,10 +8,10 @@ module.exports = {
   entry: '', // 要翻译的入口目录或文件，默认为命令行当前的 src 目录
   prefix: 'i18n', // i18n 变量前缀  i18n 变量生成规则 prefix + id + suffix
   suffix: '', // i18n 变量后缀
-  id: 1852, // i18n 自增变量 id
+  id: 1485, // i18n 自增变量 id
   translation: true, // 是否需要自动翻译中文
   to: 'en', // 中文翻译的目标语言
-  mode: 0, // 0 翻译所有 i18n 数据，1 只翻译新数据
+  mode: 1, // 0 翻译所有 i18n 数据，1 只翻译新数据
   loader: 'loader.js',
   pluginPrefix: '$t', // i18n 插件前缀 例如 vue-i18n: $t， react-i18next: t
   include: ['/src/i18nmenu/i18nTransform'], // 需要翻译的目录或文件

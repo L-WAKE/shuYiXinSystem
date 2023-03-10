@@ -1,255 +1,351 @@
+<template>
+  <div class="box">
+    <div class="card">
+      <ul>
+        <li>
+          <p>
+            {{ $t('timing') }}
+            <a-tooltip placement="top">
+              <template slot="title">
+                <span>{{ $t('print') }}</span>
+              </template>
+              <a-icon class="iconInfo" type="info-circle" />
+            </a-tooltip>
+          </p>
+          <p>￥126,560</p>
+          <p>
+            <span>
+              {{ $t('i18n1514') }} 12%
+              <a-icon style="color:red" type="caret-up" />
+            </span>&emsp;
+            <span>
+              {{ $t('i18n1515') }} 11%
+              <a-icon style="color:#52c41a" type="caret-down" />
+            </span>
+          </p>
+          <p>{{ $t('i18n1516') }}￥234.5</p>
+        </li>
+        <li>
+          <p>
+            {{ $t('userName') }}
+            <a-tooltip placement="top">
+              <template slot="title">
+                <span>{{ $t('i18n1517') }}</span>
+              </template>
+              <a-icon class="iconInfo" type="info-circle" />
+            </a-tooltip>
+          </p>
+          <p>8,846</p>
+          <p>
+            <a-progress :percent="88" :show-info="false" />
+          </p>
+          <p>{{ $t('i18n1518') }}&nbsp;1,234</p>
+        </li>
+        <li>
+          <p>
+            {{ $t('reduction') }}
+            <a-tooltip placement="top">
+              <template slot="title">
+                <span>{{ $t('i18n1519') }}</span>
+              </template>
+              <a-icon class="iconInfo" type="info-circle" />
+            </a-tooltip>
+          </p>
+          <p>6,560</p>
+          <p class="tac">
+            <img class="paySvg" src="../../assets/icons/payNum.svg" />
+          </p>
+          <p>{{ $t('i18n1520') }}&nbsp;60%</p>
+        </li>
+        <li>
+          <p>
+            {{ $t('i18n1521') }}
+            <a-tooltip placement="top">
+              <template slot="title">
+                <span>{{ $t('i18n1521') }}</span>
+              </template>
+              <a-icon class="iconInfo" type="info-circle" />
+            </a-tooltip>
+          </p>
+          <p>78%</p>
+          <p class="effect tac">
+            <a-progress type="circle" :percent="78" />
+          </p>
+          <p>
+            <span>
+              {{ $t('i18n1514') }} 12%
+              <a-icon style="color:red" type="caret-up" />
+            </span>&emsp;
+            <span>
+              {{ $t('i18n1515') }} 11%
+              <a-icon style="color:#52c41a" type="caret-down" />
+            </span>
+          </p>
+        </li>
+      </ul>
+    </div>
+    <div class="switch mt20">
+      <a-tabs default-active-key="1">
+        <a-tab-pane key="1" :tab="$t('i18n1522')">
+          <a-row>
+            <a-col :span="16">
+              <p class="sale">{{ $t('i18n1523') }}</p>
+              <div ref="switch" class="switchSale"></div>
+            </a-col>
+            <a-col :span="8">
+              <p class="sale" style="margin-left: 0">{{ $t('i18n1524') }}</p>
+              <div class="ranking" v-for="(item,index) in sortData" :key="item.id">
+                <span :class="index===0||index===1||index===2?'active':''">{{index+1}}</span>
+                <span>{{item.name}}</span>
+                <span>{{item.salesVolume}}</span>
+              </div>
+            </a-col>
+          </a-row>
+        </a-tab-pane>
+        <div class="wrapper" slot="tabBarExtraContent">
+          <div class="label">
+            <span>{{ $t('i18n1525') }}</span>
+            <span>{{ $t('i18n1526') }}</span>
+            <span>{{ $t('i18n1527') }}</span>
+            <span>{{ $t('i18n1528') }}</span>
+          </div>
+          <span class="picker">
+            <a-range-picker :placeholder="[$t('i18n476'), $t('i18n477')]" @change="timeChange" />
+          </span>
+        </div>
+      </a-tabs>
+    </div>
+    <div class="circular mt20">
+      <a-row>
+        <a-col :span="12">
+          <div class="hot">
+            <p class="hotTit">{{ $t('i18n1529') }}</p>
+          </div>
+        </a-col>
+        <a-col :span="12">col-12</a-col>
+      </a-row>
+    </div>
+  </div>
+</template>
+<script>
+import { EleResize } from "../../utils/esresize"
 export default {
-    global:{
-        nameShow:true,
-        nameColor:'#000',
-        tipTxt:this.$t('i18n1859'),
-        linkShow:false,
-        linkUrl:'',
-        linkTxt:''
-    },
-    style:{
-        echart:{
-            title:{
-                show:false,
-                text:'',
-                padding:5,
-                left:'center',
-                top:'top',
-                textStyle:{
-                    color:'#333',
-                    fontSize:18,
-                }
-            },
-            legend:{
-                show:false,
-                type:'plain',
-                left:'center',
-                top:'top',
-                orient:'horizontal',
-            },
-            grid:{
-                left:40,
-                right:50,
-                top:30,
-                bottom:20,
-            },
-            xAxis:{
-                show:true,
-                name:this.$t('i18n1860'),
-                type:'category',
-                axisLine:{
-                    show:true,
-                    lineStyle:{
-                        color:'#333',
-                        width:1,
-                        type:'solid'
-                    }
-                },
-                axisTick:{
-                    show:true
-                },
-                axisLabel:{
-                    show:true,
-                    interval:0,
-                    rotate:0,
-                    color:'#333',
-                    fontSize:12
-                },
-                splitLine:{
-                    show:false,
-                    lineStyle: {
-                        color:'#666',
-                        width:1,
-                        type:'solid'
-                    }
-                }
-            },
-            yAxis:{
-                show:true,
-                name:this.$t('i18n1861'),
-                type:'value',
-                axisLine:{
-                    show:true,
-                    lineStyle:{
-                        color:'#333',
-                        width:1,
-                        type:'solid'
-                    }
-                },
-                axisTick:{
-                    show:true
-                },
-                axisLabel:{
-                    show:true,
-                    interval:'auto',
-                    rotate:0,
-                    color:'#333',
-                    fontSize:12
-                },
-                splitLine:{
-                    show:false,
-                    lineStyle: {
-                        color:'#666',
-                        width:1,
-                        type:'solid'
-                    }
-                }
-            },
-            dataZoom: [
-                {
-                    type:'slider',
-                    show: false,
-                    start:0,
-                    end: 100,
-                }
-            ],
-        },
-        other:{
-
-        }
-    },
-    data:{
-        dataSetId: "",//对应数据集ID
-        dataSetInfo:{
-            des: "",
-            name: "",
-            nameCn: "",
-            sql: "",
-            tableType:'0',
-            dataSourceId:''
-        },
-        dataSourceId: "",//对应数据源ID
-        //数据配置维度  数组方式存放
-        drillList:[],//维度钻取配置
-        dimension: [
-            // {
-            //     "clumType":"dimension",
-            //     "colId":"维度层级ID",
-            //     "dimId":"维度ID",
-            //     "dimLevel":"维度层级",
-            //     "colNameCn":"维度层级中文名",
-            //     "colAlias":"维度层级输出别名",
-            //     "isEnableDrill":false,
-            //     "orderType":""
-            // }
-        ],
-        //指标配置  数组方式存放
-        indicator: [
-            // {
-            //     colId: "字段ID",
-            //     clumType: "indicator",//字段类型
-            //     colNameCn: "字段名称",
-            //     colAlias: "字段别名",
-            //     orderType: "", //该字段的排序方式
-            //     group: "",//分组函数
-            // }
-
-        ],
-        //临时计算指标存放
-        expression:[],
-
-        //过滤条件配置
-        filter: [
-            {
-                "groupGroupLogicType": "",//组间逻辑关系：or/and
-                "groupName": "",//组名称
-                "config": []
-            }
-            // {
-            //     colId: "字段ID",
-            //     clumType: "indicator",//字段类型，根据字段类型，前台展示可支持的过滤条件
-            //     colNameCn: "字段名称",
-            //     groupGroupLogicType: "and",//组间过滤条件关系
-            //     detGroup: "-1/1",//清单过滤、结果集过滤
-            //     //字段过滤条件配置
-            //     // 大于/greaterThan、小于/lessThan、等于/equal、
-            //     // 大于等于/greaterThanEq、小于等于lessThanEq、
-            //     // like/like，null/等于空值，notNull/不等于空值
-            //     // 不等于/notEqual
-            //
-            //     config: [
-            //         {
-            //             groupInnerLogicType:'and',
-            //             conditionValueType: "1",// 对应后台过滤条件类型编码   值，文件...
-            //             fileId: "过滤条件为文件时的文件ID",
-            //             fileName: "过滤条件为文件时，文件名",
-            //             conditionOperator: "EQ", //过滤操作符，对应后台字段值，大于、小于，小于等于，大于等于的时候value只有唯一一个值
-            //             value: [3], //
-            //         },
-            //         {
-            //             groupInnerLogicType:'and',
-            //             conditionValueType: "1",// 对应后台过滤条件类型编码   值，文件...
-            //             fileId: "过滤条件为文件时的文件ID",
-            //             fileName: "过滤条件为文件时，文件名",
-            //             conditionOperator: "GT", //过滤操作符，对应后台字段值，大于、小于，小于等于，大于等于的时候value只有唯一一个值
-            //             value: [3], //
-            //         }
-            //     ]
-            // },{
-            //     colId: "字段ID",
-            //     clumType: "indicator",//字段类型，根据字段类型，前台展示可支持的过滤条件
-            //     colNameCn: "字段名称222",
-            //     groupInnerLogicType: "and",//过滤条件之间关系 组内关系
-            //     groupGroupLogicType: "and",//组间过滤条件关系
-            //     detGroup: "-1/1",//清单过滤、结果集过滤
-            //     //字段过滤条件配置
-            //     // 大于/greaterThan、小于/lessThan、等于/equal、
-            //     // 大于等于/greaterThanEq、小于等于lessThanEq、
-            //     // like/like，null/等于空值，notNull/不等于空值
-            //     // 不等于/notEqual
-            //     config: [
-            //         {
-            //             groupInnerLogicType:'and',
-            //             conditionValueType: "1",// 对应后台过滤条件类型编码   值，文件...
-            //             fileId: "过滤条件为文件时的文件ID",
-            //             fileName: "过滤条件为文件时，文件名",
-            //             conditionOperator: "EQ", //过滤操作符，对应后台字段值，大于、小于，小于等于，大于等于的时候value只有唯一一个值
-            //             value: [3], //
-            //         },
-            //         {
-            //             groupInnerLogicType:'and',
-            //             conditionValueType: "1",// 对应后台过滤条件类型编码   值，文件...
-            //             fileId: "过滤条件为文件时的文件ID",
-            //             fileName: "过滤条件为文件时，文件名",
-            //             conditionOperator: "GT", //过滤操作符，对应后台字段值，大于、小于，小于等于，大于等于的时候value只有唯一一个值
-            //             value: [3], //
-            //         }
-            //     ]
-            // }
-        ],
-
-        //额外字段排序
-        order: [
-            // {
-            //     colId: "字段ID",
-            //     clumType: "indicator",//字段类型，根据字段类型，前台展示可支持的过滤条件
-            //     colNameCn: "字段名称",
-            //     orderType: "asc/desc", //该字段的排序方式
-            // },
-            // {
-            //     colId: "字段ID",//对应后台 COL_ID
-            //     clumType: "dimension",//字段类型
-            //     colNameCn: "字段名称",
-            //     dimLevel: "层级",//维度层级
-            //     dimId: "维度ID",
-            //     dimLevelId: "层级ID",
-            //     orderType: "asc/desc", //该字段的排序方式
-            // }
-
-
-        ],
-        //分页参数
-        pageParam: {
-            defaultPageSize:100,
-            pageSize: 100,
-            pageIndex: 1
-        },
-        //编辑页面预览数据量
-        viewSzie: 100,  //在编辑页面默认展示100条数据 , 不传参默认展示全量  ，针对配置页面假分页会赋值至pageParam中pageSize
-        polOrDet: "-1" ,  //明细或者聚合
-        report: {  //是否展示总条数
-            size: false,
-            count:0
-        }
+  data() {
+    return {
+      salesVolume: []
     }
+  },
+  mounted() {
+    this.drawEcharts() //销售趋势echarts
+  },
+  created() {
+    this.getVolume() //销售排名数据
+  },
+  computed: {
+    //销售排名数据进行排序
+    sortData() {
+      return this.salesVolume.sort(
+        (a, b) => b["salesVolume"] - a["salesVolume"]
+      )
+    }
+  },
+  methods: {
+    // 画销售额echarts
+    drawEcharts() {
+      let myEcharts = this.$echarts.init(this.$refs.switch)
+      let option = {
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "shadow" // 默认为直线，可选为：'line' | 'shadow'
+          }
+        },
+        grid: {
+          left: 20,
+          right: 10,
+          bottom: 10,
+          top: 20,
+          containLabel: true
+        },
+        xAxis: [
+          {
+            type: "category",
+            data: [
+              this.$t('i18n1530'),
+              this.$t('i18n1531'),
+              this.$t('i18n1532'),
+              this.$t('i18n1533'),
+              this.$t('i18n1534'),
+              this.$t('i18n1535'),
+              this.$t('i18n1536'),
+              this.$t('i18n1537'),
+              this.$t('i18n1538'),
+              this.$t('i18n1539'),
+              this.$t('i18n1540'),
+              this.$t('i18n1541')
+            ],
+            axisTick: {
+              alignWithLabel: true
+            }
+          }
+        ],
+        yAxis: [
+          {
+            type: "value"
+          }
+        ],
+        series: [
+          {
+            name: "y",
+            itemStyle: {
+              color: "#3aa1ff"
+            },
+            type: "bar",
+            barWidth: "60%",
+            data: [1032, 632, 616, 332, 546, 610, 918, 842, 458, 514, 705, 975]
+          }
+        ]
+      }
+      option && myEcharts.setOption(option)
+      let listener = function() {
+        myEcharts.resize()
+      }
+      EleResize.on(this.$refs.switch, listener)
+    },
+    // 获取销售排名数据
+    async getVolume() {
+      let params = {
+        id: 12233
+      }
+      let { data } = await this.$api.getRanking(params)
+      if (data.code === 200) {
+        this.salesVolume = data.data.list
+      }
+    },
+    // 开始结束日期变化
+    timeChange(date, dateString) {
+      console.log(date, dateString)
+    }
+  }
 }
+</script>
+<style scoped lang="less">
+.box {
+  display: flex;
+  flex-direction: column;
+  .card {
+    ul {
+      display: flex;
+      justify-content: space-around;
+      margin: 0;
+      padding: 0;
+      li {
+        list-style: none;
+        width: 24%;
+        height: 200px;
+        border-radius: 5px;
+        padding: 10px 20px;
+        background: #fff;
+        /deep/.effect {
+          .ant-progress-inner {
+            width: 70px !important;
+            height: 70px !important;
+          }
+        }
+        p {
+          margin: 0;
+          .iconInfo {
+            float: right;
+            cursor: pointer;
+          }
+          .paySvg {
+            width: 70px;
+            height: 70px;
+          }
+          &:nth-of-type(2) {
+            color: #000;
+            font-size: 30px;
+            line-height: 38px;
+            width: 200px;
+          }
+          &:nth-of-type(3) {
+            line-height: 90px;
+            span {
+              color: #595959;
+            }
+          }
+          &:nth-of-type(4) {
+            border-top: 1px solid #e8e8e8;
+            padding-top: 8px;
+          }
+          &:first-of-type {
+            color: #8c8c8c;
+          }
+        }
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+  .switch {
+    background: #fff;
+    padding: 10px 20px;
+    min-height: 410px;
+    .wrapper {
+      .label {
+        display: inline-block;
+        span {
+          margin-left: 24px;
+          color: #f5222d;
+          cursor: pointer;
+        }
+      }
+      .picker {
+        margin-left: 24px;
+      }
+    }
+    .sale {
+      margin: 10px 0 10px 20px;
+      color: #000;
+    }
+    .switchSale {
+      min-height: 274px;
+      max-width: 1050px;
+    }
+    .ranking {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: 10% 75% 15%;
+      span:first-of-type {
+        border-radius: 20px;
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 20px;
+        width: 20px;
+        text-align: center;
+        background-color: #f5f5f5;
+      }
+      .active {
+        background-color: #314659 !important;
+        color: #fff;
+      }
+    }
+  }
+  .circular {
+    .hot {
+      background: #fff;
+      padding: 10px 20px;
+      width: 788px;
+      height: 465px;
+      .hotTit {
+        font-size: 16px;
+        color: #000;
+        border-bottom: 1px solid #e8e8e8;
+        padding-bottom: 15px;
+      }
+    }
+  }
+}
+</style>
