@@ -14,6 +14,10 @@ import Print from 'vue-print-nb'
 import i18n_zh from '../src/assets/international/i18n_zh'
 import i18n_en from '../src/assets/international/i18n_en'
 import _ from 'lodash'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+
+Vue.use(ElementUI)
 Vue.prototype._ = _
 //
 Vue.use(Print);
