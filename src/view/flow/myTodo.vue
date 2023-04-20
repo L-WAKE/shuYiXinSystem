@@ -4,61 +4,62 @@
 
     <div>
       <el-table
-        :data="tableData"
-        style="width: 100%; margin-bottom: 20px"
+        :data="tableData1"
+        style="width: 100%"
         row-key="id"
         border
+        lazy
+        :load="load"
+        :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
       >
-        >
-        <template>
+        <template v-for="(item, index) in columnData">
           <el-table-column
-            v-for="(item, index) in columnData"
-            :type="item.type"
+            :type="item.types"
             :key="item.prop"
             :prop="item.prop"
             :label="item.label"
           >
+            <template v-if="item.children">
+              <el-table-column
+                v-for="val in item.children"
+                :type="val.types"
+                :key="val.prop"
+                :prop="val.prop"
+                :label="val.label"
+              >
+              </el-table-column>
+            </template>
           </el-table-column>
-          <!-- v-if="item.type" -->
-          <!-- <el-table-column v-else :prop="item.prop" :key="item.prop" :label="item.label">
-          </el-table-column> -->
         </template>
       </el-table>
     </div>
-
-    <!--  :type="item.type ? '' : 'selection'"-->
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      istree: false,
       columnData: [
-        { prop: "date", label: "日期", type: "" },
-        { prop: "name", label: "姓名", type: "" },
-        { prop: "address", label: "地址", type: "" },
+        { prop: "date", label: "日期", types: "" },
+        {
+          prop: "name",
+          label: "姓名",
+          types: "",
+          children: [
+            { prop: "address", label: "地址", types: "" },
+            { prop: "date", label: "日期" },
+            { prop: "name", label: "姓名", types: "" },
+          ],
+        },
+        { prop: "address", label: "地址", types: "" },
       ],
-      tableData: [
+      tableData1: [
         {
           id: 1,
           date: "2016-05-02",
           name: "王小虎",
           address: "上海市普陀区金沙江路 1518 弄",
-          children: [
-            {
-              id: 31,
-              date: "2016-05-01",
-              name: "王小虎",
-              address: "上海市普陀区金沙江路 1519 弄",
-            },
-            {
-              id: 32,
-              date: "2016-05-01",
-              name: "王小虎",
-              address: "上海市普陀区金沙江路 1519 弄",
-            },
-          ],
+          hasChildren: true,
         },
         {
           id: 2,
@@ -80,6 +81,26 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    load(tree, treeNode, resolve) {
+      setTimeout(() => {
+        resolve([
+          {
+            id: 31,
+            date: "2016-05-01",
+            name: "王小虎",
+            address: "上海市普陀区金沙江路 1519 弄",
+          },
+          {
+            id: 32,
+            date: "2016-05-01",
+            name: "王小虎",
+            address: "上海市普陀区金沙江路 1519 弄",
+          },
+        ]);
+      }, 1000);
+    },
   },
 };
 </script>
