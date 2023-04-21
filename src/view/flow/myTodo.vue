@@ -33,12 +33,30 @@
         </template>
       </el-table>
     </div>
+
+    <div>===========================================================================</div>
+
+    <div>
+      <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+        <el-checkbox v-for="city in cities" :label="city.id" :key="city.id">{{
+          city.cityName
+        }}</el-checkbox>
+      </el-checkbox-group>
+    </div>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
+      checkedCities: [],
+      cities: [
+        { id: 1, cityName: "上海" },
+        { id: 2, cityName: "北京" },
+        { id: 3, cityName: "广州" },
+        { id: 4, cityName: "深圳" },
+      ],
+
       columnData: [
         { prop: "date", label: "日期", types: "" },
         {
@@ -83,6 +101,10 @@ export default {
     };
   },
   methods: {
+    handleCheckedCitiesChange(event, item) {
+      console.log(event);
+      console.log("checkedCities", this.checkedCities);
+    },
     load(tree, treeNode, resolve) {
       setTimeout(() => {
         resolve([
