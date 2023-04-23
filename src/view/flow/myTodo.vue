@@ -3,6 +3,10 @@
     我的代办
 
     <div>
+      ============================将el-table-column 的type 设为空串
+      解决树形按钮一直是首列问题=============================================
+    </div>
+    <div>
       <el-table
         :data="tableData1"
         style="width: 100%"
@@ -34,7 +38,12 @@
       </el-table>
     </div>
 
-    <div>===========================================================================</div>
+    <br />
+    <br />
+    <div>
+      ==============================checkbox-group label设为id v-model就不须绑定字符串数组
+      解决字符串重复问题=============================================
+    </div>
 
     <div>
       <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
@@ -43,12 +52,41 @@
         }}</el-checkbox>
       </el-checkbox-group>
     </div>
+
+    <div>
+      <br />
+      <br />
+      <br />
+      ==============================单选=============================================
+    </div>
+    <div>
+      <!-- <el-checkbox-group v-model="checkboxGroup" @change="handleCheckedChange">
+        <el-checkbox v-for="city in groupCities" :key="city.id"></el-checkbox>
+      </el-checkbox-group> -->
+      <div>
+        <el-radio v-model="radio1" label="1" border>备选项1</el-radio>
+        <el-radio v-model="radio1" label="2" border>备选项2</el-radio>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
+      radio1: "1",
+      checkboxGroup: [],
+      groupCities: [
+        { id: 1, cityName: "上海" },
+        { id: 2, cityName: "北京" },
+        { id: 3, cityName: "广州" },
+        { id: 4, cityName: "深圳" },
+        { id: 5, cityName: "重庆" },
+        { id: 6, cityName: "成都" },
+        { id: 7, cityName: "杭州" },
+        { id: 8, cityName: "武汉" },
+      ],
+
       checkedCities: [],
       cities: [
         { id: 1, cityName: "上海" },
@@ -101,6 +139,10 @@ export default {
     };
   },
   methods: {
+    handleCheckedChange(event, item) {
+      console.log(event);
+      console.log("checkedCities", this.checkedCities);
+    },
     handleCheckedCitiesChange(event, item) {
       console.log(event);
       console.log("checkedCities", this.checkedCities);
